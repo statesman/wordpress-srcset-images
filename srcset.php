@@ -16,7 +16,7 @@ class WPsrcset {
     update_option('image_default_link_type', 'none');
 
     // Alter get_image_tag so the editor automatically returns srcset-ed imgs
-    add_filter( 'get_image_tag', array( $this, 'create_img_tag' ), 0, 6 );
+    add_filter( 'image_send_to_editor', array( $this, 'create_img_tag' ), 0, 6 );
 
     // Enqueue scripts
     add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts') );
@@ -59,17 +59,12 @@ class WPsrcset {
    */
   function create_img_tag( $html, $id, $alt, $title, $align, $size ) {
 
-    $image = wp_get_attachment_image_src( $id, $size );
-
-    $src = $image[0];
-    $height = $image[2];
-    $width = $image[1];
-
     // An empty array to hold all the HTML attributes
     $attrs = array();
 
     // Add fallback src
-    $attrs['src'] = $src;
+    $default_image = wp_get_attachment_image_src( $id, $size );
+    $attrs['src'] = $default_image[0];
 
     // Add srcset files
     $widths = $this->get_img_sizes();
