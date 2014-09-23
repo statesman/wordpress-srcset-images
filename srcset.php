@@ -140,29 +140,29 @@ class WPsrcset {
     return $sizes;
   }
 
-	/**
-	 * Make Wordpress's HTML validator/purifier a bit more lenient on
-   * <img> attributes. Inspired by:
-   * https://github.com/mattheu/WordPress-srcset/blob/f76c389789a7b9bab4faff3134717c0c0c6c5fee/plugin.php#L155-L175
-	 *
-	 * @param $init array
-	 * @return $init array
-   *
-   * @link http://codex.wordpress.org/Plugin_API/Filter_Reference/tiny_mce_before_init
-	 */
-	function whitelist_srcset( $init ) {
+  /**
+  * Make Wordpress's HTML validator/purifier a bit more lenient on
+  * <img> attributes. Inspired by:
+  * https://github.com/mattheu/WordPress-srcset/blob/f76c389789a7b9bab4faff3134717c0c0c6c5fee/plugin.php#L155-L175
+  *
+  * @param $init array
+  * @return $init array
+  *
+  * @link http://codex.wordpress.org/Plugin_API/Filter_Reference/tiny_mce_before_init
+  */
+  function whitelist_srcset( $init ) {
 
-		$ext = 'img[*]';
+    $ext = 'img[*]';
 
-		// Add to extended_valid_elements if it alreay exists
-		if ( isset( $init['extended_valid_elements'] ) ) {
-			$init['extended_valid_elements'] .= ',' . $ext;
-		} else {
-			$init['extended_valid_elements'] = $ext;
-		}
+    // Add to extended_valid_elements if it alreay exists
+    if ( isset( $init['extended_valid_elements'] ) ) {
+      $init['extended_valid_elements'] .= ',' . $ext;
+    } else {
+      $init['extended_valid_elements'] = $ext;
+    }
 
-		return $init;
-	}
+    return $init;
+  }
 
 }
 
